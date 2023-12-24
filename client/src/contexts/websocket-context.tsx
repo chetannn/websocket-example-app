@@ -28,7 +28,7 @@ const WebsocketContext = createContext<WebsocketContextEntry | undefined>(
   undefined
 );
 
-export const WebsocketProvider = ({
+const WebsocketProvider = ({
   children,
 }: ProviderProps<WebsocketContextEntry | undefined>) => {
   const [websocket, _] = useState<WebSocket | null>(() =>
@@ -52,10 +52,12 @@ export const WebsocketProvider = ({
   );
 };
 
-export const useWebsocket = () => {
+const useWebsocket = () => {
   const context = useContext(WebsocketContext);
   if (context === undefined) {
     throw new Error("useWebsocket must be used within a WebsocketProvider");
   }
   return context.websocket;
 };
+
+export { useWebsocket, WebsocketProvider };
